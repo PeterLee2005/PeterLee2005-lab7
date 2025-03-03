@@ -11,27 +11,28 @@ public class DotChaser {
    *
    * A STATIC CLASS? OH NO! GET IT OUT OF HERE!
    */
-  public static class Thing {
+  /* public static class Thing {
     // dir: 0=North, 1=East, 2=South, 3=West.
     // timeSinceLast: this is only important for "TypeB" Things.
     public int  row, col, dir, timeSinceLast;
     public char lab = 'r';
     public boolean isTypeB;
   }
-
+  */
   /**
    * YOU'LL NEED TO PUT THIS SOMEWHERE ELSE
    * HINT: WOULDN'T IT BE NICE TO HAVE A LIST OR QUEUE SO THAT
    *       WE DON'T HAVE TO USE NODES HERE?
    * This class is for linked lists of Thing's
    */
-  public static class Node {
+  /* public static class Node {
     public Thing data;
     public Node  next;
   }
+  */
 
   // EEEEEK! STATIC METHODS!!! PLEASE FIND THEM A BETTER HOME.
-  public static void rightTurn(Thing t) {
+  /* public static void rightTurn(Thing t) {
     t.dir = (t.dir + 1) % 4;
   }
 
@@ -77,7 +78,7 @@ public class DotChaser {
     t.col += dc[t.dir];
   }
 
-  
+  */ 
   /**
    * This static method is ok :)
    */
@@ -88,7 +89,7 @@ public class DotChaser {
       N = Integer.parseInt(args[0]);
 
     // INSTEAD OF A NODE, CREATE SOMETHING MORE USER-FRIENDLY.
-    Node L = null;
+    ThingList things = new ThingList();
     int count = 0;
 
     while( true ) {
@@ -97,7 +98,7 @@ public class DotChaser {
 
         // Add a typeA thing to the list.
         // (GEE, THAT'S A LOT OF CODE FOR JUST CREATING ONE THING)
-        Thing tA = new Thing();
+        /* Thing tA = new Thing();
         tA.row = 45;
         tA.col = 50;
         Node nA = new Node();
@@ -116,22 +117,35 @@ public class DotChaser {
         nB.next = L;
         L       = nB;
       }
+      */
+        things.addThing(new TypeA(45, 50));
+        things.addThing(new TypeB(55, 50));
+        things.addThing(new TypeC(40, 45));
+      }
+
 
       // Print out each thing.
       // (SEEMS LIKE A NICE PRINTALL() METHOD CALL WOULD WORK HERE)
       // (SEEMS LIKE A toString() METHOD IN THE CLASS WOULD ALSO BE NICE)
-      for( Node T = L; T != null; T = T.next )
+      /*for( Node T = L; T != null; T = T.next )
         System.out.println(T.data.row + " " + T.data.col + " " + T.data.lab);
 
       System.out.println("done");
       System.out.flush();
+      */
+
+      things.printAll();
 
       // Move each thing.
       // (SEEMS LIKE A NICE MOVEALL() METHOD CALL WOULD WORK HERE)
-      for( Node T = L; T != null; T = T.next ) {
+      /* for( Node T = L; T != null; T = T.next ) {
         maybeTurn(T.data);
         step(T.data);
       }
+      */
+
+      things.moveAll(rand);
+
       count++;
     }
   }
